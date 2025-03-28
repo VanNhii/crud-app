@@ -5,7 +5,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 
-const BACKEND_URL = "https://crud-app-jsus.onrender.com"; // Cập nhật URL backend
+const BACKEND_URL = "https://crud-app-xdkx.onrender.com"; // Cập nhật URL backend
 
 const Edit = () => {
 

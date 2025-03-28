@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import "./user.css"
 import { Link } from 'react-router-dom'
 
-const BACKEND_URL = "https://crud-app-jsus.onrender.com"; // câp nhật lại đường link backend
+const BACKEND_URL = "https://crud-app-xdkx.onrender.com"; // câp nhật lại đường link backend
 
 const User = () => {
 
