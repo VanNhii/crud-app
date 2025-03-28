@@ -24,3 +24,13 @@ mongoose.connect(URL).then(()=>{
 }).catch(error => console.log(error));
 
 app.use("/api", route);
+
+// 🛠 CHUYỂN FRONTEND VÀO BACKEND
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
