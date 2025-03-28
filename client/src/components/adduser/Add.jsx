@@ -4,6 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
+
+const BACKEND_URL = "https://crud-app-jsus.onrender.com"; // Thêm biến URL
+
+
 const Add = () => {
 
     const users = {
@@ -22,13 +26,21 @@ const Add = () => {
     }
 
     const submitForm = async(e) =>{
+        // e.preventDefault();
+        // await axios.post("http://localhost:8000/api/create", user)
+        // .then((response)=>{
+        //     toast.success(response.data.msg, {position:"top-right"})
+        //     navigate("/")
+        // })
+        // .catch(error => console.log(error))
         e.preventDefault();
-        await axios.post("http://localhost:8000/api/create", user)
-        .then((response)=>{
-            toast.success(response.data.msg, {position:"top-right"})
-            navigate("/")
-        })
-        .catch(error => console.log(error))
+        try {
+            const response = await axios.post(`${BACKEND_URL}/api/create`, user);
+            toast.success(response.data.msg, { position: "top-right" });
+            navigate("/");
+        } catch (error) {
+            console.error("Lỗi khi thêm user:", error);
+        }
     }
 
   return (

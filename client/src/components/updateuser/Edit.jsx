@@ -4,6 +4,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
+
+const BACKEND_URL = "https://crud-app-jsus.onrender.com"; // Cập nhật URL backend
+
 const Edit = () => {
 
 const users = {
@@ -21,7 +24,9 @@ const users = {
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/getone/${id}`)
+        // axios.get(`http://localhost:8000/api/getone/${id}`)
+        axios.get(`${BACKEND_URL}/api/getone/${id}`) // cập nhật lại URL của backend
+
         .then((response)=>{
             setUser(response.data);
             
@@ -32,13 +37,21 @@ const users = {
     },[id])
 
     const submitForm = async(e)=>{
+        // e.preventDefault();
+        // await axios.put(`http://localhost:8000/api/update/${id}`, user)
+        // .then((response)=>{
+        //     toast.success(response.data.msg, {position:"top-right"})
+        //     navigate("/")
+        // })
+        // .catch(error => console.log(error))
         e.preventDefault();
-        await axios.put(`http://localhost:8000/api/update/${id}`, user)
-        .then((response)=>{
-            toast.success(response.data.msg, {position:"top-right"})
-            navigate("/")
-        })
-        .catch(error => console.log(error))
+        try {
+            const response = await axios.put(`${BACKEND_URL}/api/update/${id}`, user);
+            toast.success(response.data.msg, { position: "top-right" });
+            navigate("/");
+        } catch (error) {
+            console.error("Lỗi khi cập nhật user:", error);
+        }
     }
   return (
     <div className='addUser' >

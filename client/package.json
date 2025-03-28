@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:7000",
+  "proxy": "https://crud-app-jsus.onrender.com",
   "eslintConfig": {
     "extends": [
       "react-app",

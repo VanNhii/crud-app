@@ -4,13 +4,16 @@ import toast from 'react-hot-toast'
 import "./user.css"
 import { Link } from 'react-router-dom'
 
+const BACKEND_URL = "https://crud-app-jsus.onrender.com"; // câp nhật lại đường link backend
+
 const User = () => {
 
     const [users, setUsers] = useState([]);
     
     useEffect(()=>{
         const fetchData = async()=>{
-            const response = await axios.get("http://localhost:8000/api/getall")
+           // const response = await axios.get(`"http://localhost:8000/api/getall"`)
+           const response = await axios.get(`${BACKEND_URL}/api/getall`);
             setUsers(response.data);
 
         }
@@ -19,15 +22,22 @@ const User = () => {
     }, [])
 
     const deleteUser = async(userId) => {
-        await axios.delete(`http://localhost:8000/api/delete/${userId}`)
-        .then((response)=>{
-            setUsers((prevUser)=> prevUser.filter((user)=>  user._id !== userId))
-            toast.success(response.data.msg, {position: 'top-right'})
+        // await axios.delete(`http://localhost:8000/api/delete/${userId}`)
+        // .then((response)=>{
+        //     setUsers((prevUser)=> prevUser.filter((user)=>  user._id !== userId))
+        //     toast.success(response.data.msg, {position: 'top-right'})
             
-        }).catch((error)=>{
-            console.log(error);
+        // }).catch((error)=>{
+        //     console.log(error);
             
-        })
+        // })
+        try {
+            const response = await axios.delete(`${BACKEND_URL}/api/delete/${userId}`);
+            setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
+            toast.success(response.data.msg, { position: 'top-right' });
+        } catch (error) {
+            console.error("Lỗi khi xóa user:", error);
+        }
     }
 
     return (
