@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
   "start": "node index.js",
-  "dev": "nodemon index.js"
+  "dev": "nodemon index.js",
+  "client": "npm run start --prefix ../client",
+  "build": "npm run build --prefix ../client"
   },
   "author": "Vo Van Nhi",
   "license": "ISC",
